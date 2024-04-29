@@ -85,7 +85,7 @@ def main():
         
     st.dataframe(data)
         
-    data = preprocess_data(data_dict)
+    data = preprocess_data(data)
         
     # Make prediction
     if st.button('Predict'):
