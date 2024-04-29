@@ -89,7 +89,10 @@ def main():
         
     # Make prediction
     if st.button('Predict'):
-        prediction = model.predict(data)
+        df = pd.read_csv('data_C.csv')
+        X, y = df.drop(columns=['churn']), df['churn']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+        prediction = model.predict(X_test)
         if prediction[0] == 1:
             st.error('The customer is likely to churn')
         else:
