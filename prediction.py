@@ -84,6 +84,8 @@ def main():
     if is_active_member == 'Yes':
         data['IsActiveMember'] = 1.0
         
+    data.head()
+        
     data = preprocess_data(data)
         
     # Make prediction
