@@ -3,8 +3,21 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
 model = joblib.load('model.pkl')
+
+def preprocess_data(data):
+    df = pd.read_csv('data_C.csv')
+    X, y = df.drop(columns=['churn']), df['churn']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    scaler = StandardScaler()
+    numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
+    X_train[numeric_col] = scaler.fit(X_train)
+    
+    data[numeric_col] = scaler.transform(data)
+    return data
 
 def main():
     st.title('Predicting Customer Churn')
@@ -71,10 +84,7 @@ def main():
     if is_active_member == 'Yes':
         data['IsActiveMember'] = 1.0
         
-    # Preprocess data
-    scaler = StandardScaler()
-    numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
-    data[numeric_col] = scaler.fit_transform(data[numeric_col])
+    data = preprocess_data(data)
         
     # Make prediction
     if st.button('Predict'):
