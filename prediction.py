@@ -39,7 +39,7 @@ def main():
     data_dict = {
         'CreditScore': 0.0, 'Age': 0.0, 'Tenure': 0, 'Balance': 0.0, 'NumOfProducts': 0, 'HasCrCard': 0, 
         'IsActiveMember': 0, 'EstimatedSalary': 0.0, 'Geography_France': 0.0, 
-        'Geography_Germany': 0.0, 'Geography_Spain':0.0, 'Gender_Female': 0.0,
+        'Geography_Germany': 0.0, 'Geography_Spain':0.0, 'Gender_Female': 0.0, 'Gender_Male': 0.0,
         'Surname Prevalency_A bit Prevalen': 0.0, 'Surname Prevalency_Not Prevalen': 0.0,
         'Surname Prevalency_Prevalent': 0.0, 'Surname Prevalency_Very Not Prevalen': 0.0,
         'Surname Prevalency_Very Prevalen': 0.0}
@@ -83,14 +83,13 @@ def main():
         
     data = pd.DataFrame(data_dict, index=[0])
         
-        
     data = preprocess_data(data)
     
     st.dataframe(data)
-    data_arr = data.to_numpy()
+    
     # Make prediction
     if st.button('Predict'):
-        pred = model.predict([data_arr])
+        pred = model.predict(data)
         if pred == 1:
             st.error('The customer is likely to churn')
         else:
