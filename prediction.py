@@ -16,8 +16,7 @@ def preprocess_data(data):
     numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
     X_train[numeric_col] = scaler.fit(X_train[numeric_col])
     
-    for key, value in data.items():
-        data[key] = scaler.transform(np.array(value).reshape(1, -1))
+    data[numeric_col] = scaler.transform(data[numeric_col])
     return data
 
 def main():
@@ -35,14 +34,6 @@ def main():
     has_credit_card = st.selectbox(label="Does the customer have a credit card?", options=['Yes', 'No'])
     is_active_member = st.selectbox(label="Is the customer an active member?", options=['Yes', 'No'])
     estimated_salary = st.number_input(label="What's the customer estimated salary?", min_value=0, max_value=200000)
-    
-    # Create a container dataframe
-    data = pd.DataFrame(columns=['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard',
-       'IsActiveMember', 'EstimatedSalary', 'Geography_France',
-       'Geography_Germany', 'Geography_Spain', 'Gender_Female', 'Gender_Male',
-       'Surname Prevalency_A bit Prevalen', 'Surname Prevalency_Not Prevalen',
-       'Surname Prevalency_Prevalent', 'Surname Prevalency_Very Not Prevalen',
-       'Surname Prevalency_Very Prevalen'])
     
     # Create a Dictinonary
     data_dict = {
@@ -89,6 +80,8 @@ def main():
     
     if is_active_member == 'Yes':
         data_dict['IsActiveMember'] = 1.0
+        
+    data = pd.DataFrame(data_dict, index=[0])
         
     st.dataframe(data)
         
