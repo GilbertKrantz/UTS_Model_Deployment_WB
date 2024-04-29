@@ -14,7 +14,7 @@ def preprocess_data(data):
     
     scaler = StandardScaler()
     numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
-    X_train[numeric_col] = scaler.fit(X_train)
+    X_train[numeric_col] = scaler.fit_transform(X_train)
     
     data[numeric_col] = scaler.transform(data)
     return data
