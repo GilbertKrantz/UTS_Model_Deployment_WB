@@ -43,46 +43,53 @@ def main():
        'Surname Prevalency_Prevalent', 'Surname Prevalency_Very Not Prevalen',
        'Surname Prevalency_Very Prevalen'])
     
-    # Set all values to 0
-    for col in data.columns:
-        data[col][0] = 0
+    # Create a Dictinonary
+    data_dict = {
+        'CreditScore': 0.0, 'Age': 0.0, 'Tenure': 0, 'Balance': 0.0, 'NumOfProducts': 0, 'HasCrCard': 0, 
+        'IsActiveMember': 0, 'EstimatedSalary': 0.0, 'Geography_France': 0.0, 
+        'Geography_Germany': 0.0, 'Geography_Spain':0.0, 'Gender_Female': 0.0,
+        'Surname Prevalency_A bit Prevalen': 0.0, 'Surname Prevalency_Not Prevalen': 0.0,
+        'Surname Prevalency_Prevalent': 0.0, 'Surname Prevalency_Very Not Prevalen': 0.0,
+        'Surname Prevalency_Very Prevalen': 0.0}
         
     # Set the input values
-    data['CreditScore'][0] = credit_score
-    data['Age'][0] = age
-    data['Tenure'][0] = tenure
-    data['Balance'][0] = balance
-    data['NumOfProducts'][0] = num_of_products
-    data['EstimatedSalary'][0] = estimated_salary
+    data_dict['CreditScore'] = credit_score
+    data_dict['Age'] = age
+    data_dict['Tenure'] = tenure
+    data_dict['Balance'] = balance
+    data_dict['NumOfProducts'] = num_of_products
+    data_dict['EstimatedSalary'] = estimated_salary
     
     if gender == 'Male':
-        data['Gender_Male'][0] = 1.0
+        data_dict['Gender_Male'] = 1.0
     else:
-        data['Gender_Female'][0] = 1.0
+        data_dict['Gender_Female'] = 1.0
         
     if geography == 'France':
-        data['Geography_France'][0] = 1.0
+        data_dict['Geography_France'] = 1.0
     elif geography == 'Germany':
-        data['Geography_Germany'][0] = 1.0
+        data_dict['Geography_Germany'] = 1.0
     else:
-        data['Geography_Spain'][0] = 1.0
+        data_dict['Geography_Spain'] = 1.0
         
     if surname_prevalency == 'Very Prevalen':
-        data['Surname Prevalency_Very Prevalen'][0] = 1.0
+        data_dict['Surname Prevalency_Very Prevalen'] = 1.0
     elif surname_prevalency == 'Prevalent':
-        data['Surname Prevalency_Prevalent'][0] = 1.0
+        data_dict['Surname Prevalency_Prevalent'] = 1.0
     elif surname_prevalency == 'A bit Prevalen':
-        data['Surname Prevalency_A bit Prevalen'][0] = 1.0
+        data_dict['Surname Prevalency_A bit Prevalen'] = 1.0
     elif surname_prevalency == 'Not Prevalen':
-        data['Surname Prevalency_Not Prevalen'][0] = 1.0
+        data_dict['Surname Prevalency_Not Prevalen'] = 1.0
     else:
-        data['Surname Prevalency_Very Not Prevalen'][0] = 1.0
+        data_dict['Surname Prevalency_Very Not Prevalen'] = 1.0
         
     if has_credit_card == 'Yes':
-        data['HasCrCard'][0] = 1.0
+        data_dict['HasCrCard'] = 1.0
     
     if is_active_member == 'Yes':
-        data['IsActiveMember'][0] = 1.0
+        data_dict['IsActiveMember'] = 1.0
+        
+    data = pd.concat([data, data_dict], ignore_index=True)
         
     st.dataframe(data)
         
