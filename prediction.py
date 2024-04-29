@@ -86,10 +86,11 @@ def main():
     st.dataframe(data)
         
     data = preprocess_data(data)
-        
+    
+    data_arr = data.to_numpy()
     # Make prediction
     if st.button('Predict'):
-        pred = model.predict(data)
+        pred = model.predict([data_arr])
         if pred == 1:
             st.error('The customer is likely to churn')
         else:
