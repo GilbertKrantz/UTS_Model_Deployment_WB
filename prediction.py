@@ -10,13 +10,13 @@ model = joblib.load('model.pkl')
 def preprocess_data(data):
     df = pd.read_csv('data_C.csv')
     X, y = df.drop(columns=['churn']), df['churn']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
     
     scaler = StandardScaler()
     numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
-    X_train[numeric_col] = scaler.fit_transform(X_train)
+    X_train[numeric_col] = scaler.fit(X_train[numeric_col])
     
-    data[numeric_col] = scaler.transform(data)
+    data[numeric_col] = scaler.transform(data[numeric_col])
     return data
 
 def main():
