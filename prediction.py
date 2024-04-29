@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 model = joblib.load('model.pkl')
 
@@ -69,6 +70,11 @@ def main():
     
     if is_active_member == 'Yes':
         data['IsActiveMember'] = 1.0
+        
+    # Preprocess data
+    scaler = StandardScaler()
+    numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
+    data[numeric_col] = scaler.fit_transform(data[numeric_col])
         
     # Make prediction
     if st.button('Predict'):
