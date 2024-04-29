@@ -4,8 +4,8 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-with open('model.pkl', 'rb') as f:     
-    model = pickle.load(f)
+pickle_in = open('model.pkl', 'rb') 
+model = pickle.load(pickle_in)
 
 def preprocess_data(data):
     df = pd.read_csv('data_C.csv')
@@ -90,7 +90,7 @@ def main():
     # Make prediction
     if st.button('Predict'):
         pred = model.predict(data)
-        if pred[0] == 1:
+        if pred == 1:
             st.error('The customer is likely to churn')
         else:
             st.success('The customer is not likely to churn')
