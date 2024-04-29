@@ -16,7 +16,8 @@ def preprocess_data(data):
     numeric_col = ['CreditScore', 'Balance', 'EstimatedSalary', 'Age']
     X_train[numeric_col] = scaler.fit(X_train[numeric_col])
     
-    data[numeric_col] = scaler.transform(data[numeric_col])
+    for key, value in data.items():
+        data[key] = scaler.transform(np.array(value).reshape(1, -1))
     return data
 
 def main():
