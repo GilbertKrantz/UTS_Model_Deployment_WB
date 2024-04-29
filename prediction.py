@@ -1,11 +1,11 @@
 import streamlit as st
-import joblib
-import numpy as np
+import pickle
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-model = joblib.load('model.pkl')
+with open('model.pkl', 'rb') as f:     
+    model = pickle.load(f)
 
 def preprocess_data(data):
     df = pd.read_csv('data_C.csv')
