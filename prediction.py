@@ -83,10 +83,10 @@ def main():
         
     data = pd.DataFrame(data_dict, index=[0])
         
-    st.dataframe(data)
         
     data = preprocess_data(data)
     
+    st.dataframe(data)
     data_arr = data.to_numpy()
     # Make prediction
     if st.button('Predict'):
