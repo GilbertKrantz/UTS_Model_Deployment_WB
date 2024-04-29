@@ -89,11 +89,9 @@ def main():
     if is_active_member == 'Yes':
         data_dict['IsActiveMember'] = 1.0
         
-    data = pd.concat([data, data_dict], ignore_index=True)
-        
     st.dataframe(data)
         
-    data = preprocess_data(data)
+    data = preprocess_data(data_dict)
         
     # Make prediction
     if st.button('Predict'):
