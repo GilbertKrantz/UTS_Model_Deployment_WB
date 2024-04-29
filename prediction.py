@@ -45,44 +45,44 @@ def main():
     
     # Set all values to 0
     for col in data.columns:
-        data[col].values[:] = 0
+        data[col][0] = 0
         
     # Set the input values
-    data['CreditScore'] = credit_score
-    data['Age'] = age
-    data['Tenure'] = tenure
-    data['Balance'] = balance
-    data['NumOfProducts'] = num_of_products
-    data['EstimatedSalary'] = estimated_salary
+    data['CreditScore'][0] = credit_score
+    data['Age'][0] = age
+    data['Tenure'][0] = tenure
+    data['Balance'][0] = balance
+    data['NumOfProducts'][0] = num_of_products
+    data['EstimatedSalary'][0] = estimated_salary
     
     if gender == 'Male':
-        data['Gender_Male'] = 1.0
+        data['Gender_Male'][0] = 1.0
     else:
-        data['Gender_Female'] = 1.0
+        data['Gender_Female'][0] = 1.0
         
     if geography == 'France':
-        data['Geography_France'] = 1.0
+        data['Geography_France'][0] = 1.0
     elif geography == 'Germany':
-        data['Geography_Germany'] = 1.0
+        data['Geography_Germany'][0] = 1.0
     else:
-        data['Geography_Spain'] = 1.0
+        data['Geography_Spain'][0] = 1.0
         
     if surname_prevalency == 'Very Prevalen':
-        data['Surname Prevalency_Very Prevalen'] = 1.0
+        data['Surname Prevalency_Very Prevalen'][0] = 1.0
     elif surname_prevalency == 'Prevalent':
-        data['Surname Prevalency_Prevalent'] = 1.0
+        data['Surname Prevalency_Prevalent'][0] = 1.0
     elif surname_prevalency == 'A bit Prevalen':
-        data['Surname Prevalency_A bit Prevalen'] = 1.0
+        data['Surname Prevalency_A bit Prevalen'][0] = 1.0
     elif surname_prevalency == 'Not Prevalen':
-        data['Surname Prevalency_Not Prevalen'] = 1.0
+        data['Surname Prevalency_Not Prevalen'][0] = 1.0
     else:
-        data['Surname Prevalency_Very Not Prevalen'] = 1.0
+        data['Surname Prevalency_Very Not Prevalen'][0] = 1.0
         
     if has_credit_card == 'Yes':
-        data['HasCrCard'] = 1.0
+        data['HasCrCard'][0] = 1.0
     
     if is_active_member == 'Yes':
-        data['IsActiveMember'] = 1.0
+        data['IsActiveMember'][0] = 1.0
         
     st.dataframe(data)
         
