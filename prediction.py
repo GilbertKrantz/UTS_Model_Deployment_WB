@@ -84,7 +84,7 @@ def main():
     if is_active_member == 'Yes':
         data['IsActiveMember'] = 1.0
         
-    data.head()
+    st.dataframe(data)
         
     data = preprocess_data(data)
         
